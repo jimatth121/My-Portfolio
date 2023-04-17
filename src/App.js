@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// import "./App.css";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
+import Nav from "./components/Nav";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer2 from "./components/Footer2";
+import About from "./components/About";
+import "./App.css";
+import SideMenu from "./components/SideMenu";
+import { useState } from "react";
 
 function App() {
+  const [isSideMenu, setIsSideMenu] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="app custome-bg-base text-[black] border-[red] dark:border-[white] dark:custome-bg-dark dark:text-white h-[100vh]">
+        <Nav onclickhumburger={() => setIsSideMenu((prev) => !prev)} />
+        <SideMenu onclickcancel={setIsSideMenu} sidemenustate={isSideMenu} />
+        <Routes>
+          <Route path="/" element={<Body />}></Route>
+          <Route path="/about" element={<About />}></Route>
+        </Routes>
+        <Footer />
+        <Footer2 />
+      </div>
+    </BrowserRouter>
   );
 }
 
